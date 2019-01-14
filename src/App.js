@@ -3,7 +3,17 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  state={
+    value: ''
+  }
+  updateValue = (value) => {
+    this.setState(() => ({
+      value: value
+    }))
+  }
   render() {
+    const { value } = this.state
+
     return (
       <div className="App">
         <header className="App-header">
@@ -14,9 +24,17 @@ class App extends Component {
           <input
             type="text"
             placeholder="Say Something"
+            value={value}
+            onChange={(event) => this.updateValue(event.target.value)}
           />
           <p className="echo">Echo:</p>
-          <p>This should mirror the text you typed into the input field.</p>
+          <p>
+            {
+              value === '' 
+              ? "This should mirror the text you typed into the input field."
+              : this.state.value
+            }
+          </p>
         </div>
       </div>
     );
